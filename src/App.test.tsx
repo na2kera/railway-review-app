@@ -1,10 +1,10 @@
 import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
-import App from "./App.tsx";
 import "@testing-library/jest-dom";
+import Login from "./Login.tsx";
 
 test("メールアドレスとパスワードの入力フィールドが存在すること", () => {
-  render(<App />);
+  render(<Login />);
 
   const emailInput = screen.getByLabelText("メールアドレス");
   expect(emailInput).toBeInTheDocument();
@@ -16,7 +16,7 @@ test("メールアドレスとパスワードの入力フィールドが存在�
 });
 
 test("ログインボタンが存在すること", () => {
-  render(<App />);
+  render(<Login />);
 
   const loginButton = screen.getByRole("button", { name: "ログイン" });
   expect(loginButton).toBeInTheDocument();

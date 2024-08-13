@@ -1,7 +1,7 @@
 import test, { expect } from "@playwright/test";
 
 test("メールアドレスとパスワードが空の場合にエラー", async ({ page }) => {
-  await page.goto("http://localhost:5173");
+  await page.goto("http://localhost:5173/login");
 
   await page.getByRole("textbox", { name: "メールアドレス" }).fill("");
   await page.getByRole("textbox", { name: "パスワード" }).fill("");
@@ -16,7 +16,7 @@ test("メールアドレスとパスワードが空の場合にエラー", async
 });
 
 test("メールアドレスの入力に不備がある場合エラー", async ({ page }) => {
-  await page.goto("http://localhost:5173");
+  await page.goto("http://localhost:5173/login");
 
   await page.getByRole("textbox", { name: "メールアドレス" }).fill("example");
   await page.getByRole("textbox", { name: "パスワード" }).fill("password123");
@@ -33,7 +33,7 @@ test("メールアドレスの入力に不備がある場合エラー", async ({
 test("メールアドレスとパスワードが正しいときエラーが出ない", async ({
   page,
 }) => {
-  await page.goto("http://localhost:5173");
+  await page.goto("http://localhost:5173/login");
 
   let dialogShown = false;
   page.on("dialog", () => {
