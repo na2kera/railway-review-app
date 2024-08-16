@@ -38,9 +38,12 @@ const Signup = () => {
     const fileInput = event?.target.file as HTMLInputElement;
     const file = fileInput?.files?.[0];
 
+    const maxSizeInBytes = 1000 * 1024;
+
     if (file) {
       new Compressor(file, {
         quality: 0.6,
+        convertSize: maxSizeInBytes,
         async success(result) {
           const formData = new FormData();
           console.log(result);
@@ -72,36 +75,38 @@ const Signup = () => {
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* register your input into the hook by invoking the "register" function */}
-      <label htmlFor="name">Name</label>
-      <br />
-      <input {...register("name", { required: true })} />
-      <br />
-      {/* include validation with required or other standard HTML validation rules */}
-      <label htmlFor="email">Email</label>
-      <br />
-      <input {...register("email", { required: true })} />
-      <br />
-      <label htmlFor="password">Password</label>
-      <br />
-      <input {...register("password", { required: true })} />
-      <br />
-      <label htmlFor="file">File</label>
-      <br />
-      <input
-        {...register("file", { required: true })}
-        type="file"
-        id="file"
-        accept="image/jpg, image/png"
-      />
-
-      {/* errors will return when field validation fails  */}
-      {errors.email && <span>This field is required</span>}
-      <br />
-      <br />
-      <input type="submit" />
-    </form>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {/* register your input into the hook by invoking the "register" function */}
+        <label htmlFor="name">Name</label>
+        <br />
+        <input {...register("name", { required: true })} />
+        <br />
+        {/* include validation with required or other standard HTML validation rules */}
+        <label htmlFor="email">Email</label>
+        <br />
+        <input {...register("email", { required: true })} />
+        <br />
+        <label htmlFor="password">Password</label>
+        <br />
+        <input {...register("password", { required: true })} />
+        <br />
+        <label htmlFor="file">File</label>
+        <br />
+        <input
+          {...register("file", { required: true })}
+          type="file"
+          id="file"
+          accept="image/jpg, image/png"
+        />
+        {/* errors will return when field validation fails  */}
+        {errors.email && <span>This field is required</span>}
+        <br />
+        <br />
+        <input type="submit" />
+      </form>
+      <a href="/login">ログイン画面へ</a>
+    </>
   );
 };
 
