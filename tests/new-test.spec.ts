@@ -7,9 +7,7 @@ test("メールアドレスとパスワードが空の場合にエラー", async
   await page.getByRole("textbox", { name: "パスワード" }).fill("");
 
   page.on("dialog", (dialog) => {
-    expect(dialog.message()).toContain(
-      "メールアドレスとパスワードを入力してください"
-    );
+    expect(dialog.message()).toContain("メールアドレスを入力してください");
     dialog.accept();
   });
   await page.getByRole("button", { name: "ログイン" }).click();

@@ -48,7 +48,6 @@ const Signup = () => {
           const formData = new FormData();
           console.log(result);
           formData.append("icon", result as File, (result as File).name);
-          console.log(formData);
           console.log(token);
           try {
             const response = await fetch(
@@ -81,15 +80,18 @@ const Signup = () => {
         <label htmlFor="name">Name</label>
         <br />
         <input {...register("name", { required: true })} />
+        {errors.name && <span>This field is required</span>}
         <br />
         {/* include validation with required or other standard HTML validation rules */}
         <label htmlFor="email">Email</label>
         <br />
-        <input {...register("email", { required: true })} />
+        <input {...register("email", { required: true })} type="email" />
+        {errors.email && <span>This field is required</span>}
         <br />
         <label htmlFor="password">Password</label>
         <br />
-        <input {...register("password", { required: true })} />
+        <input {...register("password", { required: true })} type="password" />
+        {errors.password && <span>This field is required</span>}
         <br />
         <label htmlFor="file">File</label>
         <br />
@@ -100,7 +102,6 @@ const Signup = () => {
           accept="image/jpg, image/png"
         />
         {/* errors will return when field validation fails  */}
-        {errors.email && <span>This field is required</span>}
         <br />
         <br />
         <input type="submit" />

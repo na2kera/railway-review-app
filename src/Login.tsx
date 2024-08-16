@@ -78,6 +78,7 @@ const Login = () => {
             </form>
           )}
         </Formik>
+        <a href="/signup">ユーザー登録画面へ</a>
       </div>
     </>
   );
