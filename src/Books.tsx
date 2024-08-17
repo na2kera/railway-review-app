@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./store";
+import { decrement, increment } from "./features/counter/counterSlice";
 type Book = {
   id: "";
   review: "";
@@ -9,10 +12,14 @@ type Book = {
 
 const Books = () => {
   const [books, setBooks] = useState<Book[]>([]);
+
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const getBooks = async () => {
       const res = await fetch(
-        "https://railway.bookreview.techtrain.dev/public/books"
+        `https://railway.bookreview.techtrain.dev/public/books?offset=${count}`
       );
       const data = await res.json();
       console.log(data);
@@ -20,7 +27,7 @@ const Books = () => {
     };
 
     getBooks();
-  }, []);
+  }, [count]);
 
   return (
     <>
@@ -29,7 +36,7 @@ const Books = () => {
         {books.map((book) => (
           <div
             key={book.id}
-            className="border border-gray-300 rounded-lg bor p-4 w-full mb-4"
+            className="border border-gray-300 rounded-lg p-4 w-full mb-4"
           >
             <h2 className="text-xl font-semibold">{book.title}</h2>
             <p className="mt-2">{book.review}</p>
@@ -39,6 +46,19 @@ const Books = () => {
           </div>
         ))}
       </div>
+      <button
+        aria-label="Decrement value"
+        onClick={() => dispatch(decrement())}
+      >
+        前へ
+      </button>
+      <span>{count}</span>
+      <button
+        aria-label="Increment value"
+        onClick={() => dispatch(increment())}
+      >
+        次へ
+      </button>
     </>
   );
 };
