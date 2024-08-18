@@ -21,16 +21,20 @@ const Login = () => {
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
+          onSubmit={async (values, { setSubmitting }) => {
+            setTimeout(async () => {
               alert(JSON.stringify(values, null, 2));
-              fetch("https://railway.bookreview.techtrain.dev/signin", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(values),
-              });
+              const res = await fetch(
+                "https://railway.bookreview.techtrain.dev/signin",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(values),
+                }
+              );
+              console.log(res.status);
               console.log(JSON.stringify(values));
               setSubmitting(false);
             }, 400);
