@@ -29,7 +29,12 @@ const Header = () => {
       <header className="bg-blue-500 text-white p-4 shadow-md fixed top-0 left-0 right-0 z-10">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">書籍レビュー</h1>
-          <p>{userName}</p>
+          <div className="flex items-center ml-auto">
+            <p className="mr-4">{userName}</p>
+            <a href="/profile" className="text-white">
+              プロフィール変更
+            </a>
+          </div>
         </div>
       </header>
     </>
