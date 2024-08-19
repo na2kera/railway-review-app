@@ -4,6 +4,7 @@ import { RootState } from "./store";
 import BooksData from "./BooksData";
 import Book from "./types/book";
 import Pagenation from "./Pagenation";
+import Header from "./Header";
 
 const Books = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -25,6 +26,7 @@ const Books = () => {
 
   return (
     <>
+      <Header />
       <BooksData books={books} />
       <Pagenation />
     </>

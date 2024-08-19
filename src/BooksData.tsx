@@ -6,8 +6,7 @@ type Props = {
 
 const BooksData: React.FC<Props> = ({ books }) => {
   return (
-    <div className="flex flex-col items-center justify-center w-full max-w-2xl mx-auto">
-      <h2 className="text-2xl font-bold  mb-4">書籍レビュー</h2>
+    <div className="flex flex-col items-center justify-center w-full max-w-2xl mx-auto mt-10">
       {books.map((book) => (
         <div
           key={book.id}
