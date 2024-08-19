@@ -34,7 +34,11 @@ const Login = () => {
                   body: JSON.stringify(values),
                 }
               );
-              console.log(res.status);
+              const data = await res.json();
+              console.log(data);
+              const token = data.token;
+              console.log(token);
+              localStorage.setItem("token", token);
               console.log(JSON.stringify(values));
               setSubmitting(false);
             }, 400);
