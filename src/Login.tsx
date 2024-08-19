@@ -23,7 +23,6 @@ const Login = () => {
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setTimeout(async () => {
-              alert(JSON.stringify(values, null, 2));
               const res = await fetch(
                 "https://railway.bookreview.techtrain.dev/signin",
                 {
@@ -36,6 +35,10 @@ const Login = () => {
               );
               const data = await res.json();
               console.log(data);
+              if (!res.ok) {
+                alert(`エラー: ${data.message || "ログインに失敗しました"}`);
+                return;
+              }
               const token = data.token;
               console.log(token);
               localStorage.setItem("token", token);
