@@ -18,6 +18,6 @@ test("メールアドレスとパスワードの入力フィールドが存在�
 test("ログインボタンが存在すること", () => {
   render(<Login />);
 
-  const loginButton = screen.getByRole("button", { name: "ログイン" });
+  const loginButton = screen.getByRole("button", { name: "Submit" });
   expect(loginButton).toBeInTheDocument();
 });
