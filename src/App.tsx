@@ -4,6 +4,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Books from "./Books";
 import Profile from "./Profile";
+import New from "./New";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/books" element={<Books />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/new" element={<New />} />
       </Routes>
     </>
   );
