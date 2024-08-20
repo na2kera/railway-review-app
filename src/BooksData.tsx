@@ -7,6 +7,7 @@ type Props = {
 
 const BooksData: React.FC<Props> = ({ books }) => {
   const [userName, setUserName] = useState("");
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -29,6 +30,19 @@ const BooksData: React.FC<Props> = ({ books }) => {
     getUser();
   }, []);
 
+  const deleteBook = async (id: string) => {
+    const token = localStorage.getItem("token");
+    const res = await fetch(
+      `https://railway.bookreview.techtrain.dev/books/${id}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    console.log(res);
+    window.location.reload();
+  };
+
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-2xl mx-auto mt-10">
       {books.map((book) => (
@@ -37,14 +51,22 @@ const BooksData: React.FC<Props> = ({ books }) => {
           key={book.id}
         >
           {userName === book.reviewer && (
-            <button
-              className="bg-blue-500 text-white p-2 rounded-lg"
-              onClick={() => {
-                window.location.href = `/edit/${book.id}`;
-              }}
-            >
-              編集
-            </button>
+            <div>
+              <button
+                className="bg-blue-500 text-white p-2 rounded-lg"
+                onClick={() => {
+                  window.location.href = `/edit/${book.id}`;
+                }}
+              >
+                編集
+              </button>
+              <button
+                className="bg-red-500 text-white p-2 rounded-lg"
+                onClick={() => deleteBook(book.id)}
+              >
+                削除
+              </button>
+            </div>
           )}
           <a href={`/detail/${book.id}`}>
             <h2 className="text-xl font-semibold">{book.title}</h2>
