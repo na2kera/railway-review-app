@@ -6,6 +6,7 @@ import Books from "./Books";
 import Profile from "./Profile";
 import New from "./New";
 import Detail from "./Detail";
+import Edit from "./Edit";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/new" element={<New />} />
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/edit/:id" element={<Edit />} />
       </Routes>
     </>
   );

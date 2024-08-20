@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Book from "./types/book";
 
 type Props = {
@@ -5,18 +6,54 @@ type Props = {
 };
 
 const BooksData: React.FC<Props> = ({ books }) => {
+  const [userName, setUserName] = useState("");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+    }
+
+    const getUser = async () => {
+      const res = await fetch(
+        "https://railway.bookreview.techtrain.dev/users",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await res.json();
+      console.log(data.name);
+      setUserName(data.name);
+    };
+    getUser();
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-2xl mx-auto mt-10">
       {books.map((book) => (
-        <a href={`/detail/${book.id}`} key={book.id}>
-          <div className="border border-gray-300 rounded-lg p-4 w-full mb-4">
+        <div
+          className="border border-gray-300 rounded-lg p-4 w-full mb-4"
+          key={book.id}
+        >
+          {userName === book.reviewer && (
+            <button
+              className="bg-blue-500 text-white p-2 rounded-lg"
+              onClick={() => {
+                window.location.href = `/edit/${book.id}`;
+              }}
+            >
+              編集
+            </button>
+          )}
+          <a href={`/detail/${book.id}`}>
             <h2 className="text-xl font-semibold">{book.title}</h2>
             <p className="mt-2">{book.review}</p>
             <p className="mt-1 text-sm text-gray-600">
               レビュアー: {book.reviewer}
             </p>
-          </div>
-        </a>
+          </a>
+        </div>
       ))}
     </div>
   );
