@@ -36,8 +36,17 @@ const Header = () => {
           <h1 className="text-2xl font-bold">書籍レビュー</h1>
           <div className="flex items-center ml-auto">
             <p className="mr-4">{userName}</p>
-            <a href="/profile" className="text-white">
+            <a
+              href="/profile"
+              className="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-blue-100 transition duration-300"
+            >
               プロフィール変更
+            </a>
+            <a
+              href="/new"
+              className="bg-white text-blue-500 px-4 py-2 mx-4 rounded-md hover:bg-blue-100 transition duration-300"
+            >
+              新規投稿
             </a>
             <button
               className="bg-red-500 px-4 py-2 rounded-md ml-4"
