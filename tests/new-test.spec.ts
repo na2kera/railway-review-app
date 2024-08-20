@@ -10,7 +10,7 @@ test("メールアドレスとパスワードが空の場合にエラー", async
     expect(dialog.message()).toContain("メールアドレスを入力してください");
     dialog.accept();
   });
-  await page.getByRole("button", { name: "ログイン" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
 });
 
 test("メールアドレスの入力に不備がある場合エラー", async ({ page }) => {
@@ -25,7 +25,7 @@ test("メールアドレスの入力に不備がある場合エラー", async ({
     );
     dialog.accept();
   });
-  await page.getByRole("button", { name: "ログイン" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
 });
 
 test("メールアドレスとパスワードが正しいときエラーが出ない", async ({
@@ -42,7 +42,7 @@ test("メールアドレスとパスワードが正しいときエラーが出�
     .getByRole("textbox", { name: "メールアドレス" })
     .fill("test@example.com");
   await page.getByRole("textbox", { name: "パスワード" }).fill("password123");
-  await page.getByRole("button", { name: "ログイン" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
 
   await page.waitForTimeout(1000);
   expect(dialogShown).toBe(false);
