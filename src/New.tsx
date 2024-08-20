@@ -18,6 +18,7 @@ const New = () => {
     });
     const data = await res.json();
     console.log(data);
+    window.location.href = "/books";
   };
   return (
     <>
