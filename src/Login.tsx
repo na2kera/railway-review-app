@@ -59,19 +59,21 @@ const Login = () => {
           }) => (
             <form onSubmit={handleSubmit}>
               <label htmlFor="email">メールアドレス</label>
-              <br />
+
               <input
                 type="email"
                 name="email"
                 id="email"
                 onChange={handleChange}
                 onBlur={handleBlur}
+                className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
+                placeholder="example@email.com"
                 value={values.email}
               />
               {errors.email && touched.email && errors.email}
-              <br />
+
               <label htmlFor="password">パスワード</label>
-              <br />
+
               <input
                 type="password"
                 name="password"
@@ -79,17 +81,24 @@ const Login = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.password}
+                className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
+                placeholder="password"
               />
               {errors.password && touched.password && errors.password}
-              <br />
-              <br />
-              <button type="submit" disabled={isSubmitting}>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full px-4 py-2 mt-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Submit
               </button>
             </form>
           )}
         </Formik>
-        <a href="/signup">ユーザー登録画面へ</a>
+        <a href="/signup" className="mt-4">
+          ユーザー登録画面へ
+        </a>
       </div>
     </>
   );
