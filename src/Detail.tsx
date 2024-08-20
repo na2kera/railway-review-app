@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import BookDetail from "./types/bookDetail";
 
@@ -9,6 +9,18 @@ const Detail = () => {
 
   const [book, setBook] = useState<BookDetail>();
   const [isLoading, setIsLoading] = useState(true);
+
+  const sendLog = useCallback(async () => {
+    const body = {
+      selectBookId: id,
+    };
+    const res = await fetch(`https://railway.bookreview.techtrain.dev/logs`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      body: JSON.stringify(body),
+    });
+    console.log(res);
+  }, [id]);
 
   useEffect(() => {
     const getBook = async () => {
@@ -24,9 +36,10 @@ const Detail = () => {
       console.log(data);
       setBook(data);
       setIsLoading(false);
+      await sendLog();
     };
     getBook();
-  }, [id]);
+  }, [id, sendLog]);
 
   if (isLoading) {
     return <div>Loading...</div>;
