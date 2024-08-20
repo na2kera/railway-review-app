@@ -8,9 +8,12 @@ const Detail = () => {
   console.log(id);
 
   const [book, setBook] = useState<BookDetail>();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getBook = async () => {
+      //   await new Promise((resolve) => setTimeout(resolve, 2000));
+
       const res = await fetch(
         `https://railway.bookreview.techtrain.dev/books/${id}`,
         {
@@ -20,9 +23,14 @@ const Detail = () => {
       const data = await res.json();
       console.log(data);
       setBook(data);
+      setIsLoading(false);
     };
     getBook();
   }, [id]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
